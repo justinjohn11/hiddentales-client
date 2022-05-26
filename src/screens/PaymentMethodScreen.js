@@ -13,9 +13,7 @@ export default function PaymentMethodScreen() {
     cart: { bookingAddress, paymentMethod },
   } = state;
 
-  const [paymentMethodName, setPaymentMethod] = useState(
-    paymentMethod || 'PayPal'
-  );
+  const [paymentMethodName, setPaymentMethod] = useState(paymentMethod);
 
   useEffect(() => {
     if (!bookingAddress.address) {

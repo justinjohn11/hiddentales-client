@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
@@ -57,7 +57,7 @@ function HomeScreen() {
         ) : (
           <Row>
             {places.map((place) => {
-              if(place.category!='Resort'){
+              if(place.category!=='Resort'){
                 return(
                 <Col key={place.slug} sm={6} md={4} lg={3} className="mb-3">
                 <Place place={place}></Place>

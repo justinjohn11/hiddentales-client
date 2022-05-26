@@ -82,7 +82,7 @@ function ResortScreen() {
       type: 'CART_ADD_ITEM',
       payload: { ...resort, quantity },
     });
-    navigate('/cart');
+    navigate('/wishlist');
   };
 
   const submitHandler = async (e) => {

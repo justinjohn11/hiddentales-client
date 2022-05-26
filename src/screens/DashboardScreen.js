@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-    default:
+      default:
       return state;
   }
 };
@@ -80,7 +80,7 @@ export default function DashboardScreen() {
                       ? summary.bookings[0].numbookings
                       : 0}
                   </Card.Title>
-                  <Card.Text> Booking</Card.Text>
+                  <Card.Text>Booking</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -88,7 +88,7 @@ export default function DashboardScreen() {
               <Card>
                 <Card.Body>
                   <Card.Title>
-                    $
+                    Rs
                     {summary.bookings && summary.users[0]
                       ? summary.bookings[0].totalSales.toFixed(2)
                       : 0}
@@ -99,7 +99,7 @@ export default function DashboardScreen() {
             </Col>
           </Row>
           <div className="my-3">
-            <h2>Sales</h2>
+            <h1>Booking</h1>
             {summary.dailyBookings.length === 0 ? (
               <MessageBox>No Sale</MessageBox>
             ) : (
@@ -110,13 +110,13 @@ export default function DashboardScreen() {
                 loader={<div>Loading Chart...</div>}
                 data={[
                   ['Date', 'Sales'],
-                  ...summary.dailyBookings.map((x) => [x._id, x.sales]),
+                  ...summary.dailyBookings.map((x) => [x._id, x.book]),
                 ]}
               ></Chart>
             )}
           </div>
           <div className="my-3">
-            <h2>Categories</h2>
+            <h1>Categories</h1>
             {summary.resortCategories.length === 0 ? (
               <MessageBox>No Category</MessageBox>
             ) : (

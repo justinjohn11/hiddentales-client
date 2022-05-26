@@ -138,6 +138,7 @@ export default function ResortListScreen() {
 
   return (
     <div>
+      {userInfo && userInfo.isResort &&(
       <Row>
         <Col>
           <h1>Resorts</h1>
@@ -150,7 +151,7 @@ export default function ResortListScreen() {
           </div>
         </Col>
       </Row>
-
+)}
       {loadingCreate && <LoadingBox></LoadingBox>}
       {loadingDelete && <LoadingBox></LoadingBox>}
 
@@ -160,42 +161,53 @@ export default function ResortListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
+        
+          <table className="table" style={{background:"white"}}>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
+                <th>AVAILABILITY</th>
                 <th>CATEGORY</th>
+                {
+                    userInfo && userInfo.isResort &&(
                 <th>ACTIONS</th>
+                    )}
               </tr>
             </thead>
             <tbody>
-              {resorts.map((resort) => (
+              {resorts.map((resort) =>{
+                if(resort.email===userInfo.email || userInfo.isAdmin){
+                return ( 
                 <tr key={resort._id}>
-                  <td>{resort._id}</td>
                   <td>{resort.name}</td>
                   <td>{resort.price}</td>
+                  <td>{resort.availability}</td>
                   <td>{resort.category}</td>
                   <td>
+                    {
+                    userInfo && userInfo.isResort &&(
                     <Button
                       type="button"
-                      variant="light"
+                      variant="dark"
                       onClick={() => navigate(`/admin/resort/${resort._id}`)}
                     >
                       Edit
                     </Button>
-                    &nbsp;
+                   )}
+                    {userInfo && userInfo.isResort &&(
                     <Button
                       type="button"
-                      variant="light"
+                      variant="dark"
                       onClick={() => deleteHandler(resort)}
                     >
                       Delete
                     </Button>
+              )}
                   </td>
                 </tr>
-              ))}
+                )}
+              })}
             </tbody>
           </table>
           <div>

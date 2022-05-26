@@ -7,6 +7,7 @@ import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
+import Select from 'react-bootstrap/FormSelect';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -15,7 +16,6 @@ import Button from 'react-bootstrap/Button';
 const districtData = [
   {
     name:"Select"
-
   },
   {
     name:"Idukki",
@@ -67,9 +67,11 @@ export default function ResortEditScreen() {
       loading: true,
       error: '',
     });
-
+  
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
+  const [email, setEmail] = useState(String(userInfo.email));
+    console.log(email);
   const [{dist,city},setDistData] = useState({
     dist:"",
     city:""
@@ -98,10 +100,12 @@ export default function ResortEditScreen() {
     // alert(event.target.value);
     setDistData(data => ({ ...data, city: event.target.value }));
   }
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch({ type: 'FETCH_REQUEST' });
+        dispatch({ type: 'FETCH_REQUEST' });    
         const { data } = await axios.get(`/api/resorts/${resortId}`);
         setName(data.name);
         setSlug(data.slug);
@@ -134,6 +138,7 @@ export default function ResortEditScreen() {
           _id: resortId,
           name,
           slug,
+          email:email,
           dist,
           city,
           price,
@@ -147,6 +152,7 @@ export default function ResortEditScreen() {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
+
       dispatch({
         type: 'UPDATE_SUCCESS',
       });
@@ -220,20 +226,20 @@ export default function ResortEditScreen() {
             <Form.Group className="mb-3" controlId="category">
             <Form.Label>District</Form.Label>
                   Sort by{' '}
-                  <select
+                  <Select
                     value={dist}
                     onChange={handleDistrictChange}
                   >{district}
-                  </select>
+                  </Select>
                 
           </Form.Group>
           <Form.Group className="mb-3" controlId="category">
           <Form.Label>City</Form.Label>
-                  <select
+                  <Select
                     value={city}
                     onChange={handleCityChange}
                   >{citys}
-                  </select>
+                  </Select>
           </Form.Group>
           </Form.Group>
           <Form.Group className="mb-3" controlId="name">
@@ -283,7 +289,7 @@ export default function ResortEditScreen() {
 
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>Category</Form.Label>
-            <select
+            <Select
                     value={category}
                     onChange={(e) => setCategory(e.target.value )}
                   >
@@ -293,7 +299,7 @@ export default function ResortEditScreen() {
                     <option >3-Star</option>
                     <option >4-Star</option>
                     <option >5-Star</option>
-                  </ select >
+                  </ Select >
           </Form.Group>
           <Form.Group className="mb-3" controlId="countInStock">
             <Form.Label>Availability</Form.Label>

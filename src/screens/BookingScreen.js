@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -76,7 +76,7 @@ export default function BookingScreen() {
     loadingPay: false,
   });
 
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer(); 
 
   function onApprove () {
     console.log("approve called");
@@ -179,7 +179,7 @@ export default function BookingScreen() {
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Shipping</Card.Title>
+              <Card.Title>Booking Address</Card.Title>
               <Card.Text>
                 <strong>Name:</strong> {booking.bookingAddress.fullName} <br />
                 <strong>Address: </strong> {booking.bookingAddress.address},
@@ -212,7 +212,7 @@ export default function BookingScreen() {
 
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Items</Card.Title>
+              <Card.Title>Room</Card.Title>
               <ListGroup variant="flush">
                 {booking.bookingItems.map((item) => (
                   <ListGroup.Item key={item._id}>
@@ -264,7 +264,7 @@ export default function BookingScreen() {
                     </Col>
                   </Row>
                 </ListGroup.Item>
-                {!booking.isPaid && (
+                {(!booking.isPaid && (booking.user ===userInfo._id)) && (
                   <ListGroup.Item>
                     {isPending ? (
                       <LoadingBox />
@@ -335,7 +335,7 @@ export default function BookingScreen() {
                     {loadingPay && <LoadingBox></LoadingBox>}
                   </ListGroup.Item>
                 )}
-                {userInfo.isAdmin && booking.isPaid && !booking.isCheckedIn && (
+                {userInfo.isResort && booking.isPaid && !booking.isCheckedIn && (
                   <ListGroup.Item>
                     {loadingCheckin && <LoadingBox></LoadingBox>}
                     <div className="d-grid">

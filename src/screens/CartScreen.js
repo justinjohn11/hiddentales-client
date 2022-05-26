@@ -19,7 +19,7 @@ export default function CartScreen() {
 
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/resorts/${item._id}`);
-    if (data.countInStock < quantity) {
+    if (data.availability < quantity) {
       window.alert('Sorry. Resort is not Available');
       return;
     }
@@ -78,7 +78,7 @@ export default function CartScreen() {
                         onClick={() =>
                           updateCartHandler(item, item.quantity + 1)
                         }
-                        disabled={item.quantity === item.countInStock}
+                        disabled={item.quantity === item.availability}
                       >
                         <i className="fas fa-plus-circle"></i>
                       </Button>

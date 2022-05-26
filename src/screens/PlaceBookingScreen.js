@@ -114,7 +114,7 @@ export default function PlaceBookingScreen() {
 
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Items</Card.Title>
+              <Card.Title>Room</Card.Title>
               <ListGroup variant="flush">
                 {cart.cartItems.map((item) => (
                   <ListGroup.Item key={item._id}>
@@ -132,6 +132,14 @@ export default function PlaceBookingScreen() {
                       </Col>
                       <Col md={3}>₹{item.price}</Col>
                     </Row>
+                    <h4 style={{color:"black"}}>Check-In</h4>
+                    <Row>
+                    <input type="date" id="checkin" name="checkin"/>
+                    </Row>
+                    <h4 style={{color:"black"}}>Check-Out</h4>
+                    <Row>
+                    <input type="date" id="checkout" name="checkout"/>
+                    </Row>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
@@ -146,7 +154,7 @@ export default function PlaceBookingScreen() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Items</Col>
+                    <Col>Room Price</Col>
                     <Col>₹{cart.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>

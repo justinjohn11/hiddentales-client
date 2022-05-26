@@ -39,8 +39,8 @@ import CartScreen from './screens/CartScreen';
 import ResortScreen from './screens/ResortScreen';
 import BookingListScreen from './screens/BookingListScreen';
 import ResortHome from './screens/ResortHome';
-
-
+import ResortRegScreen from './screens/ResortRegScreen';
+import ForgotPasswordScreen from './screens/ForgetPasswordScreen';
 
 // import Map from './Map';
 
@@ -115,6 +115,7 @@ function App() {
                   <Link to='/pro' className="nav-link">
                     Resorts
                   </Link>
+                  {userInfo && !userInfo.isResort &&(
                 <Link to="/wishlist" className="nav-link">
                     wishlist
                     {cart.cartItems.length > 0 && (
@@ -123,6 +124,7 @@ function App() {
                       </Badge>
                     )}
                   </Link>
+                  )}
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
@@ -144,7 +146,7 @@ function App() {
                     <Link className="nav-link" to="/signin">
                       Sign In
                     </Link>
-                  )}
+                  ) }
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
@@ -163,6 +165,16 @@ function App() {
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
                     </NavDropdown>
+                  )}
+                  {userInfo && userInfo.isResort &&(
+                    <NavDropdown title="Resort" id="admin-nav-dropdown">
+                     <LinkContainer to="/admin/resorts">
+                     <NavDropdown.Item>Resorts</NavDropdown.Item>
+                   </LinkContainer>
+                   <LinkContainer to="/admin/bookings">
+                     <NavDropdown.Item>Bookings</NavDropdown.Item>
+                   </LinkContainer>
+                   </NavDropdown>
                   )}
                   
                 </Nav>
@@ -201,7 +213,11 @@ function App() {
               <Route path="/wishlist" element={<CartScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
-              <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/signup" element={<SignupScreen />} />  
+              <Route path="/forgetpassword" element={<ForgotPasswordScreen />} />
+
+              <Route path="/resortsignup" element={<ResortRegScreen />} />
+
               {/* <Route path="/map" element={<Map />} /> */}
 
               {/* <Route path="/resortreg" element={<ResortReg />} /> */}
@@ -269,6 +285,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+             
              
               <Route
                 path="/admin/users"

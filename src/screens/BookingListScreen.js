@@ -99,7 +99,7 @@ export default function BookingListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
+        <table className="table" style={{background:"white"}}>
           <thead>
             <tr>
               <th>ID</th>
@@ -119,7 +119,6 @@ export default function BookingListScreen() {
                 <td>{booking.createdAt.substring(0, 10)}</td>
                 <td>{booking.totalPrice.toFixed(2)}</td>
                 <td>{booking.isPaid ? booking.paidAt.substring(0, 10) : 'No'}</td>
-
                 <td>
                   {booking.isCheckedIn
                     ? booking.checkedAt.substring(0, 10)
@@ -128,7 +127,7 @@ export default function BookingListScreen() {
                 <td>
                   <Button
                     type="button"
-                    variant="light"
+                    variant="dark"
                     onClick={() => {
                       navigate(`/booking/${booking._id}`);
                     }}
@@ -138,7 +137,7 @@ export default function BookingListScreen() {
                   &nbsp;
                   <Button
                     type="button"
-                    variant="light"
+                    variant="dark"
                     onClick={() => deleteHandler(booking)}
                   >
                     Delete

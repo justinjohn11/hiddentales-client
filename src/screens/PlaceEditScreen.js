@@ -7,6 +7,7 @@ import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
+import Select from 'react-bootstrap/FormSelect';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -233,24 +234,26 @@ export default function PlaceEditScreen() {
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>District</Form.Label>
                   Sort by{' '}
-                  <select
+                  <Select
                     value={dist}
                     onChange={handleDistrictChange}
                   >{district}
-                  </select>
+                  <option >Select</option>
+                  </Select>
                 
           </Form.Group>
           <Form.Group className="mb-3" controlId="category">
           <Form.Label>City</Form.Label>
-                  <select
+                  <Select
                     value={city}
                     onChange={handleCityChange}
                   >{citys}
-                  </select>
+                  <option >Select</option>
+                  </Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>Category</Form.Label>
-            <select
+            <Select
                     value={category}
                     onChange={(e) => setCategory(e.target.value )}
                   >
@@ -261,7 +264,7 @@ export default function PlaceEditScreen() {
                     <option >Winter sport areas</option>
                     <option >Areas known for culture and heritage</option>
                     <option >Hill Stations</option>
-                  </select>
+                  </Select>
           </Form.Group>
           {/* <Form.Group className="mb-3" controlId="slug">
             <Form.Label>Slug</Form.Label>
@@ -307,9 +310,6 @@ export default function PlaceEditScreen() {
             />
             {loadingUpload && <LoadingBox></LoadingBox>}
           </Form.Group>
-
-          
-         
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control

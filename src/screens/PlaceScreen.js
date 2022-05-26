@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
-import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
@@ -16,8 +15,6 @@ import { getError } from '../utils';
 import { Store } from '../Store';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
-import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
-import logger from 'use-reducer-logger';
 import Resort from '../components/Resort';
 const reducer = (state, action) => {
   switch (action.type) {
@@ -65,7 +62,7 @@ function PlaceScreen() {
   const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   const [{ loading, error, place, resorts, loadingCreateReview }, dispatch] =
     useReducer(reducer, {
